@@ -10,7 +10,7 @@
                     <DropdownLink :items="searchDropDownItems" v-on:valueChanged="valueChanged($event)"/>
                 </div>
                 <div class="search-input__input-wrapper">
-                    <AlgoliaSearchBox :options="algolia" />
+                    <AlgoliaSearchBox v-if="isAlgoliaSearch" :options="algolia" />
                 </div>
 
                 <div class="search-input__icon-wrapper">
@@ -48,6 +48,10 @@
         computed: {
             algolia () {
                 return this.$themeLocaleConfig.algolia || this.$site.themeConfig.algolia || {}
+            },
+
+            isAlgoliaSearch () {
+                return this.algolia && this.algolia.apiKey && this.algolia.indexName
             },
         },
 
