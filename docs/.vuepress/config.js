@@ -1,3 +1,11 @@
+const SearchProduct = {
+    CLOUDLINUXOS: 2,
+    KERNELCARE: 3,
+    CLN: 4,
+    IMUNIFY360: 5,
+    IMUNIFYAV: 6
+};
+
 module.exports = {
     base: "/",
     head: [
@@ -49,7 +57,7 @@ module.exports = {
 
                 products: [
                     {
-                        id: 2,
+                        id: SearchProduct.CLOUDLINUXOS,
                         title: 'CloudLinux OS',
                         icon: '/clos-icon.svg',
                         links: [
@@ -58,10 +66,15 @@ module.exports = {
                             {label: 'Knowledge base', href: 'https://somelink'},
                             {label: 'Blog', href: 'https://somelink'},
                             {label: 'Forum', href: 'https://somelink'},
-                        ]
+                        ],
+                        algolia: {
+                            apiKey: "3990019335416f9a96a6a47d07e25187",
+                            indexName: "cloudlinuxos",
+                            appId: "0TCNL6CGX8"
+                        },
                     },
                     {
-                        id: 3,
+                        id: SearchProduct.KERNELCARE,
                         title: 'KernelCare',
                         icon: '/kc-icon.svg',
                         links: [
@@ -70,10 +83,15 @@ module.exports = {
                             {label: 'Knowledge base', href: 'https://somelink'},
                             {label: 'Blog', href: 'https://somelink'},
                             {label: 'Forum', href: 'https://somelink'},
-                        ]
+                        ],
+                        algolia: {
+                            apiKey: "c4c1bbf8d3bb32958b26dd7cc5e74472",
+                            indexName: "kernelcare",
+                            appId: "R7FCMJM4P7"
+                        },
                     },
                     {
-                        id: 4,
+                        id: SearchProduct.CLN,
                         title: 'Cloudlinux Network (CLN)',
                         icon: '/cln-icon.svg',
                         links: [
@@ -81,10 +99,12 @@ module.exports = {
                             {label: 'Documentation', href: 'https://somelink'},
                             {label: 'Knowledge base', href: 'https://somelink'},
                             {label: 'Blog', href: 'https://somelink'},
-                        ]
+                        ],
+                        algolia: {
+                        },
                     },
                     {
-                        id: 5,
+                        id: SearchProduct.IMUNIFY360,
                         title: 'Imunify 360',
                         icon: '/im-icon.svg',
                         links: [
@@ -92,10 +112,15 @@ module.exports = {
                             {label: 'Documentation', href: 'https://somelink'},
                             {label: 'Knowledge base', href: 'https://somelink'},
                             {label: 'Blog', href: 'https://somelink'},
-                        ]
+                        ],
+                        algolia: {
+                            apiKey: '29339fdc91169afd5a7dd2a0a9bba6d2',
+                            indexName: 'imunify360',
+                            appId: 'C6CXTFLPAJ'
+                        },
                     },
                     {
-                        id: 6,
+                        id: SearchProduct.IMUNIFYAV,
                         title: 'ImunifyAV/AV+',
                         icon: '/im-icon.svg',
                         links: [
@@ -103,15 +128,14 @@ module.exports = {
                             {label: 'Documentation', href: 'https://somelink'},
                             {label: 'Knowledge base', href: 'https://somelink'},
                             {label: 'Blog', href: 'https://somelink'},
-                        ]
+                        ],
+                        algolia: {
+                            apiKey: '1ee8ee1bcded0cdcc07ffb4bc8c51d95',
+                            indexName: 'imunifyav',
+                            appId: 'BH4D9OD16A'
+                        },
                     }
                 ],
-
-                algolia: {
-                    apiKey: "efaa28397ce47241021d716c439b80d1",
-                    indexName: "cloudlinuxos",
-                    appId: "0TCNL6CGX8"
-                },
 
                 footer: {
                     stayInTouch: "Stay in touch",
@@ -157,7 +181,7 @@ module.exports = {
 
                 products: [
                     {
-                        id: 2,
+                        id: SearchProduct.CLOUDLINUXOS,
                         title: 'CloudLinux OS',
                         icon: '/clos-icon.svg',
                         links: [
@@ -166,10 +190,15 @@ module.exports = {
                             {label: 'Knowledge base', href: 'https://somelink/rus/'},
                             {label: 'Blog', href: 'https://somelink/rus/'},
                             {label: 'Forum', href: 'https://somelink/rus/'},
-                        ]
+                        ],
+                        algolia: {
+                            apiKey: "3990019335416f9a96a6a47d07e25187",
+                            indexName: "cloudlinuxos-ru",
+                            appId: "0TCNL6CGX8"
+                        },
                     },
                     {
-                        id: 3,
+                        id: SearchProduct.KERNELCARE,
                         title: 'KernelCare',
                         icon: '/kc-icon.svg',
                         links: [
@@ -178,10 +207,12 @@ module.exports = {
                             {label: 'Knowledge base', href: 'https://somelink/rus/'},
                             {label: 'Blog', href: 'https://somelink/rus/'},
                             {label: 'Forum', href: 'https://somelink/rus/'},
-                        ]
+                        ],
+                        algolia: {
+                        },
                     },
                     {
-                        id: 4,
+                        id: SearchProduct.CLN,
                         title: 'Cloudlinux Network (CLN)',
                         icon: '/cln-icon.svg',
                         links: [
@@ -189,10 +220,12 @@ module.exports = {
                             {label: 'Documentation', href: 'https://somelink/rus/'},
                             {label: 'Knowledge base', href: 'https://somelink/rus/'},
                             {label: 'Blog', href: 'https://somelink/rus/'},
-                        ]
+                        ],
+                        algolia: {
+                        },
                     },
                     {
-                        id: 5,
+                        id: SearchProduct.IMUNIFY360,
                         title: 'Imunify 360',
                         icon: '/im-icon.svg',
                         links: [
@@ -200,10 +233,15 @@ module.exports = {
                             {label: 'Documentation', href: 'https://somelink/rus/'},
                             {label: 'Knowledge base', href: 'https://somelink/rus/'},
                             {label: 'Blog', href: 'https://somelink/rus/'},
-                        ]
+                        ],
+                        algolia: {
+                            apiKey: '29339fdc91169afd5a7dd2a0a9bba6d2',
+                            indexName: 'imunify360-ru',
+                            appId: 'C6CXTFLPAJ'
+                        },
                     },
                     {
-                        id: 6,
+                        id: SearchProduct.IMUNIFYAV,
                         title: 'ImunifyAV/AV+',
                         icon: '/im-icon.svg',
                         links: [
@@ -211,11 +249,11 @@ module.exports = {
                             {label: 'Documentation', href: 'https://somelink/rus/'},
                             {label: 'Knowledge base', href: 'https://somelink/rus/'},
                             {label: 'Blog', href: 'https://somelink/rus/'},
-                        ]
+                        ],
+                        algolia: {
+                        },
                     }
                 ],
-
-                algolia: {},
 
                 footer: {
                     stayInTouch: "Будем на связи",

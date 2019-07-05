@@ -10,7 +10,7 @@
                     <DropdownLink :items="searchDropDownItems" v-on:valueChanged="valueChanged($event)"/>
                 </div>
                 <div class="search-input__input-wrapper">
-                    <AlgoliaSearchBox v-if="isAlgoliaSearch" :options="algolia" />
+                    <AlgoliaSearchBox v-if="isAlgoliaSearch" :options="algoliaOptions"/>
                 </div>
 
                 <div class="search-input__icon-wrapper">
@@ -25,51 +25,73 @@
     import DropdownLink from './DropdownLink.vue'
     import AlgoliaSearchBox from './AlgoliaSearchBox.vue'
 
+    const ALL_PRODUCTS = 1;
+
     export default {
         components: { DropdownLink, AlgoliaSearchBox },
 
         data() {
             return {
-                searchType: 1, // All products
+                searchInProduct: ALL_PRODUCTS, // All products
                 searchDropDownItems: {},
             };
         },
 
         created() {
-            this.searchDropDownItems = this.getSearchDropDownItems(this.searchType);
+            this.searchDropDownItems = this.getSearchDropDownItems(this.searchInProduct);
         },
 
         watch: {
-            searchType(val) {
+            $lang(newValue) {
+                this.searchDropDownItems = this.getSearchDropDownItems(ALL_PRODUCTS);
+            },
+
+            searchInProduct(val) {
                 this.searchDropDownItems = this.getSearchDropDownItems(val);
             }
         },
 
         computed: {
-            algolia () {
-                return this.$themeLocaleConfig.algolia || this.$site.themeConfig.algolia || {}
+            algoliaOptions() {
+                if (this.searchInProduct === ALL_PRODUCTS) {
+                    return this.$themeLocaleConfig.products
+                        .filter(item => item.algolia && item.algolia.apiKey && item.algolia.indexName)
+                        .map((item) => ({ ...item.algolia, id: item.id }));
+                }
+
+                const currentProduct = this.getCurrentProduct();
+                const hasAlgoliaOptions = !!currentProduct.algolia
+                    && currentProduct.algolia.apiKey
+                    && currentProduct.algolia.indexName;
+                return hasAlgoliaOptions ? [{ ...currentProduct.algolia, id: currentProduct.id }] : [];
             },
 
-            isAlgoliaSearch () {
-                return this.algolia && this.algolia.apiKey && this.algolia.indexName
+            isAlgoliaSearch() {
+                return this.algoliaOptions && this.algoliaOptions.length > 0;
             },
         },
 
         methods: {
             valueChanged(newValue) {
-                this.searchType = newValue.id;
+                this.searchInProduct = newValue.id;
             },
 
-            getSearchDropDownItems(currentProductId) {
-                const items = this.$themeLocaleConfig.products.map((item) => {
-                    return { id: item.id, text: item.title };
-                });
-                items.push({ id: 1, text: this.$themeLocaleConfig.header.search.defaultSearchType });
+            getSearchDropDownItems(searchProductId) {
+                const items = this.$themeLocaleConfig.products
+                    .filter(item => item.algolia && item.algolia.apiKey && item.algolia.indexName)
+                    .map((item) => {
+                        return { id: item.id, text: item.title };
+                    });
+                items.push({ id: ALL_PRODUCTS, text: this.$themeLocaleConfig.header.search.defaultSearchType });
 
-                const currentProduct = items.find((item) => currentProductId === item.id);
+                const currentProduct = items.find((item) => searchProductId === item.id);
 
                 const text = currentProduct ? currentProduct.text : this.$themeLocaleConfig.header.search.defaultSearchType;
                 return { text, items };
+            },
+
+            getCurrentProduct() {
+                return this.$themeLocaleConfig.products.find(item => item.id === this.searchInProduct);
             }
         }
     }

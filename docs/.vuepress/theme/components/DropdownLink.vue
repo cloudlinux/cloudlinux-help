@@ -124,18 +124,19 @@
             &:hover .nav-dropdown
                 display block !important
 
-            .dropdown-title .text
-                display flex
-                align-items center
-                margin-left 6px
-                font-weight 600
+            .dropdown-title
+                .text
+                    display flex
+                    align-items center
+                    margin-left 6px
+                    font-weight 600
 
-            .dropdown-title .arrow
-                border-left 4px solid transparent
-                border-right 4px solid transparent
-                border-top 6px solid $arrowBgColor
-                border-bottom 0
-                margin-left 4px
+                .arrow
+                    border-left 4px solid transparent
+                    border-right 4px solid transparent
+                    border-top 6px solid $arrowBgColor
+                    border-bottom 0
+                    margin-left 4px
 
             .nav-dropdown
                 display none

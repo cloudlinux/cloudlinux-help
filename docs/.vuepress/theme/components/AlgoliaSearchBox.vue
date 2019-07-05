@@ -1,185 +1,171 @@
 <template>
-    <form id="search-form" class="algolia-search-wrapper search-box">
-        <input id="algolia-search-input"
-               class="search-query search-input"
+    <div class="algolia-search-box">
+        <input class="search-input"
+               v-model="query"
                :placeholder="$themeLocaleConfig.header.search.question"/>
-    </form>
+        <div class="search-results" v-if="showResults">
+            <ul>
+                <li v-for="(productResults, index) in searchResults" class="product-item">
+                    <div class="product-title">{{ getProductTitle(index) }}</div>
+                    <ul>
+                        <li v-for="item in productResults" class="result">
+                            <a :href="item.url" class="result__link">
+                                <span class="result__parent">{{ item.hierarchy.lvl0 }}:</span>
+                                <span class="result__anchor">
+                                    {{ item.anchor }}
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
 </template>
 
 <script>
     export default {
         props: ['options'],
 
+        data() {
+            return {
+                query: '',
+                searchResults: {},
+                indexes: {},
+                showResults: false
+            };
+        },
+
         mounted() {
-            this.initialize(this.options, this.$lang)
+            this.initialize(this.options);
         },
 
         methods: {
-            initialize(userOptions, lang) {
+            initialize(userOptions) {
+                this.searchResults = {};
+                this.showResults = false;
                 Promise.all([
-                    import(/* webpackChunkName: "docsearch" */ 'docsearch.js/dist/cdn/docsearch.min.js'),
-                    import(/* webpackChunkName: "docsearch" */ 'docsearch.js/dist/cdn/docsearch.min.css')
-                ]).then(([docsearch]) => {
-                    docsearch = docsearch.default
-                    const { algoliaOptions = {} } = userOptions
-                    docsearch(Object.assign(
-                        {},
-                        userOptions,
-                        {
-                            inputSelector: '#algolia-search-input'
-                        }
-                    ))
-                })
+                    import(/* webpackChunkName: "docsearch" */ 'algoliasearch/dist/algoliasearch.js')
+                ]).then(([algoliasearch]) => {
+                    this.indexes = {};
+                    for (let option of this.options) {
+                        const client = algoliasearch.default(option.appId, option.apiKey);
+                        this.indexes[option.id] = client.initIndex(option.indexName);
+                    }
+                });
             },
 
-            update(options, lang) {
-                this.$el.innerHTML = '<input id="algolia-search-input" class="search-query">'
-                this.initialize(options, lang)
+            getProductTitle(productId) {
+                const product = this.$themeLocaleConfig.products.find(item => item.id === +productId);
+                return product ? product.title : null;
             }
         },
 
         watch: {
-            $lang(newValue) {
-                this.update(this.options, newValue)
+            options(newValue) {
+                this.initialize(newValue);
             },
 
-            options(newValue) {
-                this.update(newValue, this.$lang)
+            query(newValue) {
+                this.searchResults = {};
+                this.showResults = false;
+                if (!newValue) {
+                    return;
+                }
+                for (let id in this.indexes) {
+                    this.indexes[id].search({ query: newValue },
+                        (err, { hits } = {}) => {
+                            if (err) throw err;
+                            if (hits.length === 0) return;
+                            this.searchResults[id] = hits;
+                            this.showResults = true;
+                        }
+                    );
+                }
+            },
+
+            searchResults(newValue) {
+                console.log(newValue);
             }
         }
     }
 </script>
 
 <style lang="stylus" scoped>
-    @import '../styles/config.styl'
+    .algolia-search-box
+        position relative
 
-    .algolia-search-wrapper
-        .search-input
-            width 560px
-            height 48px
-            font-size 14px
-            color #373737
-            box-sizing border-box
-            line-height 48px
-            padding-left 25px
+    .search-input
+        width 560px
+        height 48px
+        font-size 14px
+        color #373737
+        box-sizing border-box
+        line-height 48px
+        padding-left 25px
+        border none
+        outline none
+        border-left 1px solid #f0f0f0
+
+        &::placeholder
+            color #adadad
+
+    & > span
+        vertical-align middle
+
+    .search-results
+        position absolute
+        min-height 200px
+        max-height 560px
+        overflow-y auto
+        overflow-x hidden
+        background-color #FFF
+        color #000
+        width 560px
+        height auto
+        box-sizing border-box
+        padding 0.6rem
+        border 1px solid #ddd
+        border-bottom-color #ccc
+        text-align left
+        border-radius 0.25rem
+        white-space nowrap
+
+    .product-item
+        margin-top 10px
+        padding-top 10px
+        border-top 1px solid #ccc
+
+        &:first-child
+            margin-top 0
+            padding-top 0
+            border-top none
+
+    .product-title
+        font-size 1rem
+        font-weight 600
+        margin-bottom 10px
+
+    .result
+        border-bottom 1px solid #2b98f0
+        padding 5px 10px
+
+        &:last-child
             border none
-            outline none
-            border-left 1px solid #f0f0f0
 
-            &::placeholder
-                color #adadad
+        &__link
+            text-decoration none
 
-        & > span
-            vertical-align middle
+        &__parent
+            font-weight 600
+            color: #000
+            margin-right 10px
+            word-wrap: break-word;
 
-        .algolia-autocomplete
-            line-height normal
+            &:nth-child(even)
+                background-color #FFF
 
-            .ds-dropdown-menu
-                background-color #fff
-                border 1px solid #999
-                border-radius 4px
-                font-size 16px
-                margin 6px 0 0
-                padding 4px
-                text-align left
-
-                &:before
-                    border-color #999
-
-                [class*=ds-dataset-]
-                    border none
-                    padding 0
-
-                .ds-suggestions
-                    margin-top 0
-
-                .ds-suggestion
-                    border-bottom 1px solid $borderColor
-
-            .algolia-docsearch-suggestion--highlight
-                color #2c815b
-
-            .algolia-docsearch-suggestion
-                border-color $borderColor
-                padding 0
-
-                .algolia-docsearch-suggestion--category-header
-                    padding 5px 10px
-                    margin-top 0
-                    background $accentColor
-                    color #fff
-                    font-weight 600
-
-                    .algolia-docsearch-suggestion--highlight
-                        background rgba(255, 255, 255, 0.6)
-
-                .algolia-docsearch-suggestion--wrapper
-                    padding 0
-
-                .algolia-docsearch-suggestion--title
-                    font-weight 600
-                    margin-bottom 0
-                    color $textColor
-
-                .algolia-docsearch-suggestion--subcategory-column
-                    vertical-align top
-                    padding 5px 7px 5px 5px
-                    border-color $borderColor
-                    background #f1f3f5
-
-                    &:after
-                        display none
-
-                .algolia-docsearch-suggestion--subcategory-column-text
-                    color #555
-
-            .algolia-docsearch-footer
-                border-color $borderColor
-
-            .ds-cursor .algolia-docsearch-suggestion--content
-                background-color #e7edf3 !important
-                color $textColor
-
-    @media (min-width: $MQMobile)
-        .algolia-search-wrapper
-            .algolia-autocomplete
-                .algolia-docsearch-suggestion
-                    .algolia-docsearch-suggestion--subcategory-column
-                        float none
-                        width 150px
-                        min-width 150px
-                        display table-cell
-
-                    .algolia-docsearch-suggestion--content
-                        float none
-                        display table-cell
-                        width 100%
-                        vertical-align top
-
-                    .ds-dropdown-menu
-                        min-width 515px !important
-
-    @media (max-width: $MQMobile)
-        .algolia-search-wrapper
-            .ds-dropdown-menu
-                min-width calc(100vw - 4rem) !important
-                max-width calc(100vw - 4rem) !important
-
-            .algolia-docsearch-suggestion--wrapper
-                padding 5px 7px 5px 5px !important
-
-            .algolia-docsearch-suggestion--subcategory-column
-                padding 0 !important
-                background white !important
-
-            .algolia-docsearch-suggestion--subcategory-column-text:after
-                content " > "
-                font-size 10px
-                line-height 14.4px
-                display inline-block
-                width 5px
-                margin -3px 3px 0
-                vertical-align middle
+        &__anchor
+            word-wrap: break-word;
 
 </style>
