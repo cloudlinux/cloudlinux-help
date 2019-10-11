@@ -163,26 +163,9 @@ module.exports = {
             },
             "/ru/": {
                 layouts: {
-                    product: {
+                    helpCenter: {
                         siteTitle: "Cloudlinux OS"
                     },
-                },
-                title: "Язык",
-                selectText: "Рус",
-                label: "Русский",
-                editLinkText: "Редактировать",
-                tryFree: "Попробовать бесплатно",
-                search: "Поиск",
-                serviceWorker: {
-                    updatePopup: {
-                        message: "Доступен новый контент",
-                        buttonText: "Обновить"
-                    }
-                },
-                algolia: {
-                    apiKey: "efaa28397ce47241021d716c439b80d1",
-                    indexName: "cloudlinuxos-ru",
-                    appId: "0TCNL6CGX8"
                 },
                 navBar: {
                     submitRequest: "Отправить запрос",
@@ -197,43 +180,43 @@ module.exports = {
                                 resources: [
                                     { name: "Getting started", icon: "/svg/gs-blue-icon.svg", url: "/ru/getting-started" },
                                     { name: "Documentation", icon: "/svg/doc-blue-icon.svg", url: "/ru/introduction" },
-                                    { name: "Knowledge base", icon: "/svg/kb-blue-icon.svg", url: "/kb" },
-                                    { name: "Video tutorials", icon: "/svg/video-blue-icon.svg", url: "/vt" },
-                                    { name: "Forum", icon: "/svg/forum-blue-icon.svg", url: "/forum" },
-                                    { name: "Blog", icon: "/svg/blog-blue-icon.svg", url: "/blog" },
+                                    { name: "Knowledge base", icon: "/svg/kb-blue-icon.svg", url: "/ru/kb" },
+                                    { name: "Video tutorials", icon: "/svg/video-blue-icon.svg", url: "/ru/vt" },
+                                    { name: "Forum", icon: "/svg/forum-blue-icon.svg", url: "/ru/forum" },
+                                    { name: "Blog", icon: "/svg/blog-blue-icon.svg", url: "/ru/blog" },
                                 ]
                             },
                             {
                                 name: "KernelCare",
                                 resources: [
-                                    { name: "Getting started", icon: "/svg/gs-blue-icon.svg", url: "https://docs.kernelcare.com/getting-started" },
-                                    { name: "Documentation", icon: "/svg/doc-blue-icon.svg", url: "https://docs.kernelcare.com/" },
-                                    { name: "Knowledge base", icon: "/svg/kb-blue-icon.svg", url: "https://docs.kernelcare.com/kb" },
-                                    { name: "Video tutorials", icon: "/svg/video-blue-icon.svg", url: "https://docs.kernelcare.com/vt" },
-                                    { name: "Forum", icon: "/svg/forum-blue-icon.svg", url: "https://docs.kernelcare.com/forum" },
-                                    { name: "Blog", icon: "/svg/blog-blue-icon.svg", url: "https://docs.kernelcare.com/blog" },
+                                    { name: "Getting started", icon: "/svg/gs-blue-icon.svg", url: "https://docs.kernelcare.com/ru/getting-started" },
+                                    { name: "Documentation", icon: "/svg/doc-blue-icon.svg", url: "https://docs.kernelcare.com/ru/" },
+                                    { name: "Knowledge base", icon: "/svg/kb-blue-icon.svg", url: "https://docs.kernelcare.com/ru/kb" },
+                                    { name: "Video tutorials", icon: "/svg/video-blue-icon.svg", url: "https://docs.kernelcare.com/ru/vt" },
+                                    { name: "Forum", icon: "/svg/forum-blue-icon.svg", url: "https://docs.kernelcare.com/ru/forum" },
+                                    { name: "Blog", icon: "/svg/blog-blue-icon.svg", url: "https://docs.kernelcare.com/ru/blog" },
                                 ]
                             },
                             {
                                 name: "Imunify360",
                                 resources: [
-                                    { name: "Getting started", icon: "/svg/gs-blue-icon.svg", url: "https://docs.imunify360.com/getting-started" },
-                                    { name: "Documentation", icon: "/svg/doc-blue-icon.svg", url: "https://docs.imunify360.com/" },
-                                    { name: "Knowledge base", icon: "/svg/kb-blue-icon.svg", url: "https://docs.imunify360.com/kb" },
-                                    { name: "Video tutorials", icon: "/svg/video-blue-icon.svg", url: "https://docs.imunify360.com/vt" },
-                                    { name: "Forum", icon: "/svg/forum-blue-icon.svg", url: "https://docs.imunify360.com/forum" },
-                                    { name: "Blog", icon: "/svg/blog-blue-icon.svg", url: "https://docs.imunify360.com/blog" },
+                                    { name: "Getting started", icon: "/svg/gs-blue-icon.svg", url: "https://docs.imunify360.com/ru/getting-started" },
+                                    { name: "Documentation", icon: "/svg/doc-blue-icon.svg", url: "https://docs.imunify360.com/ru/" },
+                                    { name: "Knowledge base", icon: "/svg/kb-blue-icon.svg", url: "https://docs.imunify360.com/ru/kb" },
+                                    { name: "Video tutorials", icon: "/svg/video-blue-icon.svg", url: "https://docs.imunify360.com/ru/vt" },
+                                    { name: "Forum", icon: "/svg/forum-blue-icon.svg", url: "https://docs.imunify360.com/ru/forum" },
+                                    { name: "Blog", icon: "/svg/blog-blue-icon.svg", url: "https://docs.imunify360.com/ru/blog" },
                                 ]
                             },
                             {
                                 name: "ImunifyAV/AV+",
                                 resources: [
-                                    { name: "Getting started", icon: "/svg/gs-blue-icon.svg", url: "https://docs.imunifyav.com/getting-started" },
-                                    { name: "Documentation", icon: "/svg/doc-blue-icon.svg", url: "https://docs.imunifyav.com/" },
-                                    { name: "Knowledge base", icon: "/svg/kb-blue-icon.svg", url: "https://docs.imunifyav.com/kb" },
-                                    { name: "Video tutorials", icon: "/svg/video-blue-icon.svg", url: "https://docs.imunifyav.com/vt" },
-                                    { name: "Forum", icon: "/svg/forum-blue-icon.svg", url: "https://docs.imunifyav.com/forum" },
-                                    { name: "Blog", icon: "/svg/blog-blue-icon.svg", url: "https://docs.imunifyav.com/blog" },
+                                    { name: "Getting started", icon: "/svg/gs-blue-icon.svg", url: "https://docs.imunifyav.com/ru/getting-started" },
+                                    { name: "Documentation", icon: "/svg/doc-blue-icon.svg", url: "https://docs.imunifyav.com/ru/" },
+                                    { name: "Knowledge base", icon: "/svg/kb-blue-icon.svg", url: "https://docs.imunifyav.com/ru/kb" },
+                                    { name: "Video tutorials", icon: "/svg/video-blue-icon.svg", url: "https://docs.imunifyav.com/ru/vt" },
+                                    { name: "Forum", icon: "/svg/forum-blue-icon.svg", url: "https://docs.imunifyav.com/ru/forum" },
+                                    { name: "Blog", icon: "/svg/blog-blue-icon.svg", url: "https://docs.imunifyav.com/ru/blog" },
                                 ]
                             },
                         ]
@@ -258,6 +241,23 @@ module.exports = {
                     },
                     { text: "Блог", url: "https://www.cloudlinux.com/blog" }
                 ],
+                title: "Язык",
+                selectText: "Рус",
+                label: "Русский",
+                editLinkText: "Редактировать",
+                tryFree: "Попробовать бесплатно",
+                search: "Поиск",
+                serviceWorker: {
+                    updatePopup: {
+                        message: "Доступен новый контент",
+                        buttonText: "Обновить"
+                    }
+                },
+                algolia: {
+                    apiKey: "efaa28397ce47241021d716c439b80d1",
+                    indexName: "cloudlinuxos-ru",
+                    appId: "0TCNL6CGX8"
+                },
             }
         }
     }
