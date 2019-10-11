@@ -119,6 +119,7 @@ module.exports = {
                 },
                 productPage: {
                     title: "CloudLinux Help Center",
+                    subtitle: "All documentations right at your fingertips"
                 },
                 stayInTouch: "Stay in touch",
                 bottomLinks: [
@@ -223,7 +224,8 @@ module.exports = {
                     }
                 },
                 productPage: {
-                    title: "CloudLinux OS support resources",
+                    title: "CloudLinux Help Center",
+                    subtitle: "All documentations right at your fingertips"
                 },
                 stayInTouch: "Будем на связи",
                 bottomLinks: [
